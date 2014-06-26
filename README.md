@@ -18,7 +18,7 @@ So actually, this 'new' coin exists for the following reasons:
      for genesis block generation look at main.cpp)
  - allows me to experiment with coin parameters (in a private network)
 
-Finally, I only tested the command line server/tool 'smallchange' for the
+Finally, I only tested the command line server/tool 'Yamcoin' for the
 first 30 blocks. Credits go to the original authors/communities that
 created Bitcoin and Litecoin.
 

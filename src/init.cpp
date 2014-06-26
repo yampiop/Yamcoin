@@ -137,10 +137,10 @@ bool AppInit(int argc, char* argv[])
             // First part of help message is specific to SmallChange server / RPC client
             std::string strUsage = _("SmallChange version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  smallchange [options]                     " + "\n" +
-                  "  smallchange [options] <command> [params]  " + _("Send command to -server or smallchange") + "\n" +
-                  "  smallchange [options] help                " + _("List commands") + "\n" +
-                  "  smallchange [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  Yamcoin [options]                     " + "\n" +
+                  "  Yamcoin [options] <command> [params]  " + _("Send command to -server or Yamcoin") + "\n" +
+                  "  Yamcoin [options] help                " + _("List commands") + "\n" +
+                  "  Yamcoin [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -150,7 +150,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "smallchange:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "Yamcoin:"))
                 fCommandLine = true;
 
         if (fCommandLine)
@@ -220,8 +220,8 @@ extern double GetDifficulty(const CBlockIndex* blockindex = NULL);
 std::string HelpMessage()
 {
     string strUsage = _("Options:") + "\n" +
-        "  -conf=<file>           " + _("Specify configuration file (default: smallchange.conf)") + "\n" +
-        "  -pid=<file>            " + _("Specify pid file (default: smallchange.pid)") + "\n" +
+        "  -conf=<file>           " + _("Specify configuration file (default: Yamcoin.conf)") + "\n" +
+        "  -pid=<file>            " + _("Specify pid file (default: Yamcoin.pid)") + "\n" +
         "  -gen                   " + _("Generate coins") + "\n" +
         "  -gen=0                 " + _("Don't generate coins") + "\n" +
         "  -datadir=<dir>         " + _("Specify data directory") + "\n" +
@@ -232,7 +232,7 @@ std::string HelpMessage()
         "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n" +
         "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n"
         "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n" +
-        "  -port=<port>           " + _("Listen for connections on <port> (default: 9030 or testnet: 19030)") + "\n" +
+        "  -port=<port>           " + _("Listen for connections on <port> (default: 2524 or testnet: 12524)") + "\n" +
         "  -maxconnections=<n>    " + _("Maintain at most <n> connections to peers (default: 125)") + "\n" +
         "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n" +
         "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n" +
@@ -274,7 +274,7 @@ std::string HelpMessage()
 #endif
         "  -rpcuser=<user>        " + _("Username for JSON-RPC connections") + "\n" +
         "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n" +
-        "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 9031)") + "\n" +
+        "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 2525)") + "\n" +
         "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n" +
         "  -rpcconnect=<ip>       " + _("Send commands to node running on <ip> (default: 127.0.0.1)") + "\n" +
         "  -blocknotify=<cmd>     " + _("Execute command when the best block changes (%s in cmd is replaced by block hash)") + "\n" +
@@ -429,7 +429,7 @@ bool AppInit2()
 
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
 
-    // Make sure only a single smallchange process is using the data directory.
+    // Make sure only a single Yamcoin process is using the data directory.
     boost::filesystem::path pathLockFile = GetDataDir() / ".lock";
     FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist.
     if (file) fclose(file);
@@ -590,7 +590,7 @@ bool AppInit2()
         strErrors << _("Error loading blkindex.dat") << "\n";
 
     // as LoadBlockIndex can take several minutes, it's possible the user
-    // requested to kill smallchange-qt during the last operation. If so, exit.
+    // requested to kill Yamcoin-qt during the last operation. If so, exit.
     // As the program has not fully started yet, Shutdown() is possibly overkill.
     if (fRequestShutdown)
     {
